@@ -40,10 +40,9 @@ pipeline {
         }
         stage("Push to Private Docker Hub Repo"){
             steps{
-                withCredentials([usernamePassword(credentialsId:"DockerHubCreds",passwordVariable:"dockerPass",usernameVariable:"dockerUser")]){
-                sh "docker login -u ${env.dockerUser} -p ${env.dockerPass}"
-                sh "docker tag devsecops-todo-app:latest ${env.dockerUser}/devsecops-todo-app:latest"
-                sh "docker push ${env.dockerUser}/devsecops-todo-app:latest"
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USERNAME')]) {
+                sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASS}"
+                sh "docker push prateek0912/todo_app/devsecops-todo-app:latest"
                 }
                 
             }
