@@ -102,26 +102,19 @@ Start by launching an EC2 instance on AWS, which will serve as your server for J
     ```bash
     docker run -itd --name sonarqube -p 9000:9000 sonarqube:lts-community
     ```
-2. Access SonarQube at `http://<EC2_IP>:9000` and create a token for Jenkins:
-    - Navigate to **Administrator → Security → Users → Tokens → Update Tokens**.
-    - Generate a token with the name "jenkins".
+To make the DevSecOps pipeline, you first need to create a user on SonarQube who will have access provided to Jenkins. Start by navigating to **SonarQube** and going to **Administrator > Security > Users > Tokens**. Update the tokens by naming one "jenkins" and generating it. With the SonarQube setup done, you can proceed to configure Jenkins to work with SonarQube.
 
-3. Install the SonarQube Scanner plugin in Jenkins:
-    - **Manage Jenkins → Plugins → Available Plugins**.
-    - Search for **SonarQube Scanner** and install it.
+Begin by installing the necessary SonarQube plugins in Jenkins. Go to **Manage Jenkins**, then **Plugins**, and search for "SonarQube Scanner" under **Available Plugins**. Install this plugin.
 
-4. Add SonarQube token and DockerHub credentials in Jenkins:
-    - **Manage Jenkins → Credentials → System → Global credentials → Add Credentials**.
+Next, you need to add the SonarQube token to Jenkins. Go to **Manage Jenkins**, click on **Credentials**, then **System**, and select **Global credentials**. Add a new credential as **Secret text**, where you will paste the token copied from SonarQube. Name this credential "Sonar" and provide a description, then create it.
 
-5. Link SonarQube with Jenkins:
-    - **Manage Jenkins → System → SonarQube servers**.
-    - Add your SonarQube server with the generated token.
+Similarly, you should add Docker credentials in Jenkins. Navigate to **Manage Jenkins**, then **Credentials**, and again to **System** under **Global credentials**. Add a new credential as **Username with password**. Enter your DockerHub username and password, name it "DockerHub," provide a description, and create it.
 
-6. Enable Sonar Scanner in Jenkins:
-    - **Manage Jenkins → Tools → SonarQube Scanner installations**.
+After setting up the credentials, you will link SonarQube with Jenkins. Go to **Manage Jenkins**, then **System**, and find **SonarQube servers**. Add a new SonarQube server with the name "Sonar" and set the **Server URL** to `http://IP:9000`. Use the previously created Sonar authentication token for the server, then apply and save these settings.
 
-7. Create SonarQube webhooks:
-    - **Administrator → Webhooks → Create**.
+To enable Sonar Scanner, return to **Manage Jenkins**, then **Tools**, and find **SonarQube Scanner installations**. Add a new installation named "Sonar," set the version to "latest," and apply and save the configuration.
+
+Lastly, create Sonar webhooks by going to **SonarQube**, then **Administrator**, and selecting **Webhooks**. Create a new webhook named "jenkins" with the URL set to `http://IP:8080/sonarqube-webhook/`, and then create it.
 
 ### Step 5: Install Trivy
 
