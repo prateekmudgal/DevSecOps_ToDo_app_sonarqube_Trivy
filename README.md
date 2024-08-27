@@ -1,4 +1,4 @@
-Adding the "Running the Project" block near the beginning is a great idea to provide users with quick access to essential setup instructions. Here's the updated README structure:
+
 
 ---
 
@@ -212,4 +212,13 @@ After successfully deploying, you can view the ToDo application. Here’s a prev
 
 ---
 
-This structure helps users quickly get started with the project while still providing detailed setup instructions.
+# Thank You
+
+I hope you find it useful. If you have any doubt in any of the step then feel free to contact me. If you find any issue in it then let me know.
+
+<table>
+  <tr>
+    <th><a href="https://www.linkedin.com/in/prateek-mudgal-devops" target="_blank"><img src="https://img.icons8.com/color/452/linkedin.png" alt="linkedin" width="30"/></a></th>
+    <th><a href="mailto:mudgalprateek00@gmail.com" target="_blank"><img src="https://img.icons8.com/color/344/gmail-new.png" alt="Mail" width="30"/></a></th>
+  </tr>
+</table>
