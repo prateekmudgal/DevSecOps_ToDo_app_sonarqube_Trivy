@@ -15,7 +15,7 @@ pipeline {
         stage("SonarQube Analysis"){
             steps{
                withSonarQubeEnv("Sonar"){
-                   sh "${SONAR_HOME}/bin/sonar-scanner -Dsonar.projectName=node-todo-app -Dsonar.projectKey=node-todo-app -X"
+                   sh "${SONAR_HOME}/bin/sonar-scanner -Dsonar.projectName=ToDo_app -Dsonar.projectKey=ToDo_app -X"
                }
             }
         }
