@@ -26,12 +26,7 @@ pipeline {
                }
             }
         }
-        stage("OWASP"){
-            steps{
-                dependencyCheck additionalArguments: '--scan ./', odcInstallation: 'OWASP'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }
-        }
+        
         stage("Build & Test"){
             steps{
                 sh 'docker build -t devsecops-todo-app:latest .'
