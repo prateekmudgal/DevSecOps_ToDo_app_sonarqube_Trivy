@@ -29,20 +29,20 @@ pipeline {
         
         stage("Build & Test"){
             steps{
-                sh 'docker build -t devsecops-todo-app:latest .'
+                sh 'docker build -t prateek0912/todo_app:latest .'
                 echo "Code Built Successfully"
             }
         }
         stage("Trivy"){
             steps{
-                sh "trivy image devsecops-todo-app"
+                sh "trivy image prateek0912/todo_app:latest"
             }
         }
         stage("Push to Private Docker Hub Repo"){
             steps{
                 withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USERNAME')]) {
                 sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASS}"
-                sh "docker push prateek0912/todo_app/devsecops-todo-app:latest"
+                sh "docker push prateek0912/todo_app:latest"
                 }
                 
             }
