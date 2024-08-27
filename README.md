@@ -2,7 +2,7 @@
 
 ---
 
-# DevSecOps ToDo Application
+# DevSecOps ToDo Application With Sonarqube & Trivy
 
 This project demonstrates the creation of a **Node.js ToDo application** with a DevSecOps approach. We leverage Jenkins for CI/CD, SonarQube for code quality and security analysis, and Trivy for Docker image scanning.
 
@@ -46,6 +46,8 @@ Ensure you have the following set up before proceeding:
 
 Start by launching an EC2 instance on AWS, which will serve as your server for Jenkins, Docker, SonarQube, and Trivy.
 
+![sshconnect](https://github.com/user-attachments/assets/40c42c72-39b1-41bc-921d-823e704ec3a9)
+
 ### Step 2: Install Jenkins
 
 1. Update your package lists:
@@ -69,10 +71,17 @@ Start by launching an EC2 instance on AWS, which will serve as your server for J
     sudo systemctl start jenkins
     sudo systemctl enable jenkins
     ```
+
 5. Check Jenkins status:
     ```bash
     sudo service jenkins status
-    ```
+
+        
+    
+
+    
+![jenkinsinterface](https://github.com/user-attachments/assets/4332df7d-37f1-4f44-9c8a-cd7911daf056)
+
 
 ### Step 3: Install Docker and Docker-Compose
 
@@ -101,6 +110,9 @@ Start by launching an EC2 instance on AWS, which will serve as your server for J
 1. Run SonarQube in a Docker container:
     ```bash
     docker run -itd --name sonarqube -p 9000:9000 sonarqube:lts-community
+    
+    ![sonarqube](https://github.com/user-attachments/assets/23aad431-c0e4-4e08-b2e4-e1760f7e0746)
+
     ```
 To make the DevSecOps pipeline, you first need to create a user on SonarQube who will have access provided to Jenkins. Start by navigating to **SonarQube** and going to **Administrator > Security > Users > Tokens**. Update the tokens by naming one "jenkins" and generating it. With the SonarQube setup done, you can proceed to configure Jenkins to work with SonarQube.
 
@@ -109,6 +121,8 @@ Begin by installing the necessary SonarQube plugins in Jenkins. Go to **Manage J
 Next, you need to add the SonarQube token to Jenkins. Go to **Manage Jenkins**, click on **Credentials**, then **System**, and select **Global credentials**. Add a new credential as **Secret text**, where you will paste the token copied from SonarQube. Name this credential "Sonar" and provide a description, then create it.
 
 Similarly, you should add Docker credentials in Jenkins. Navigate to **Manage Jenkins**, then **Credentials**, and again to **System** under **Global credentials**. Add a new credential as **Username with password**. Enter your DockerHub username and password, name it "DockerHub," provide a description, and create it.
+![sonar](https://github.com/user-attachments/assets/fabb6e6b-4deb-4ba1-a08d-b89804924782)
+
 
 After setting up the credentials, you will link SonarQube with Jenkins. Go to **Manage Jenkins**, then **System**, and find **SonarQube servers**. Add a new SonarQube server with the name "Sonar" and set the **Server URL** to `http://IP:9000`. Use the previously created Sonar authentication token for the server, then apply and save these settings.
 
@@ -196,11 +210,20 @@ pipeline {
     }
 }
 ```
+![pipeline](https://github.com/user-attachments/assets/d7941ef1-d5fc-4996-9248-1bbd38abc92c)
+
+## SonarQube Output
+
+
+![sonarqube result](https://github.com/user-attachments/assets/b0526cb3-6b99-4fd4-966a-94ff1796417f)
+
 
 ## Application Output
 
 After successfully deploying, you can view the ToDo application. Here’s a preview:
 
+
+![app output](https://github.com/user-attachments/assets/593c0f06-675f-4cf5-a65d-19c1ff434cf5)
 
 
 ---
