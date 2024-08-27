@@ -5,6 +5,8 @@
 # DevSecOps ToDo Application With Sonarqube & Trivy
 
 This project demonstrates the creation of a **Node.js ToDo application** with a DevSecOps approach. We leverage Jenkins for CI/CD, SonarQube for code quality and security analysis, and Trivy for Docker image scanning.
+![Add a little bit of body text](https://github.com/user-attachments/assets/d058677d-f1c7-4c92-b700-62f67a86a797)
+
 
 ## Running the Project
 
