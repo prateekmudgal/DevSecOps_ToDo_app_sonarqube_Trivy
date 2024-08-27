@@ -2,6 +2,6 @@ version: '3.9'
 
 services:
   web:
-    image: "devsecops-todo-app:latest"
+    image: "prateek0912/todo_app:latest"
     ports:
       - "8000:8000"
